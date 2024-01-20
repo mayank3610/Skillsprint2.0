@@ -6,21 +6,20 @@ haar_file="haarcascade_frontalface_default.xml"
 
 datasets="C:/Users/Preet/PycharmProjects/facedetect/dataset"
 
-name="mayank"
+name="Mayank"
 
 
 
 path = os.path.join(datasets, name)
-# if sub_dataset folder doesn't already exist, make the folder with the name defined above
 if not os.path.isdir(path):
     os.mkdir(path)
 
-# defining the size of images
+#size of image
 (width, height) = (640, 480)
-
+#cascade classifier is use for object detection
 face_cascade = cv2.CascadeClassifier(haar_file)
 cap = cv2.VideoCapture(0)
-# returns true or false (if the camera is on or not)
+# if camera is on then it will show true
 print("Webcam is open? ", cap.isOpened())
 # wait for the camera to turn on (just to be safe, in case the camera needs time to load up)
 time.sleep(2)
@@ -43,9 +42,9 @@ while count < 101:
             cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
             # define 'face' as the inside of the rectangle we made above and make it grayscale
             face = img_gray[y:y + h, x:x + w]
-            # resize the face images to the size of the 'face' variable above (i.e: area captured inside of the rectangle)
+            # resize the face images to the size of the 'face'
             face_resize = cv2.resize(face, (width, height))
-            # save images with their corresponding number
+            # it can save all the images with number
             cv2.imwrite('%s/%s.png' % (path,count), face_resize)
         count += 1
         cv2.imshow('Face Capturing', frame)
